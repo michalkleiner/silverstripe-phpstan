@@ -11,7 +11,7 @@ Add PHPStan functionality to Silverstripe.
 ## Composer Install
 
 ```
-composer require silbinarywolf/silverstripe-phpstan:~0.1
+composer require silbinarywolf/silverstripe-phpstan:~0.2
 ```
 
 ## Requirements
