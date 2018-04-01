@@ -9,6 +9,7 @@ use PHPStan\Reflection\ClassReflection;
 use PHPStan\Reflection\PropertyReflection;
 use PHPStan\Type\FileTypeMapper;
 use PHPStan\Type\ObjectType;
+use PHPStan\Reflection\PropertiesClassReflectionExtension;
 
 // Silverstripe
 use Object;
@@ -17,7 +18,7 @@ use DataObject;
 use ContentController;
 use ViewableData;
 
-class PropertyClassReflectionExtension implements \PHPStan\Reflection\PropertiesClassReflectionExtension
+class PropertyClassReflectionExtension implements PropertiesClassReflectionExtension
 {
     /** @var \PHPStan\Reflection\PropertyReflection[][] */
     private $properties = [];

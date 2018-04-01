@@ -3,70 +3,21 @@
 namespace SilbinaryWolf\SilverstripePHPStan;
 
 use PHPStan\Reflection\ClassReflection;
-use PHPStan\Reflection\MethodReflection;
 use PHPStan\Type\Type;
 use PHPStan\Type\ObjectType;
 
 // Silverstripe
 use ManyManyList;
 
-class ComponentManyManyMethod implements MethodReflection
+class ComponentManyManyMethod extends ComponentMethod
 {
-
-    /** @var string */
-    private $name;
-
-    /** @var \PHPStan\Reflection\ClassReflection */
-    private $declaringClass;
-
-    /** todo(Jake) */
+    /** @var DataListType **/
     private $returnType;
 
     public function __construct(string $name, ClassReflection $declaringClass, ObjectType $type)
     {
-        $this->name = $name;
-        $this->declaringClass = $declaringClass;
+        parent::__construct($name, $declaringClass, $type);
         $this->returnType = new DataListType(ManyManyList::class, $type);
-    }
-
-    public function getDeclaringClass(): ClassReflection
-    {
-        return $this->declaringClass;
-    }
-
-    public function getPrototype(): MethodReflection
-    {
-        return $this;
-    }
-
-    public function isStatic(): bool
-    {
-        return false;
-    }
-
-    public function getParameters(): array
-    {
-        return [];
-    }
-
-    public function isVariadic(): bool
-    {
-        return false;
-    }
-
-    public function isPrivate(): bool
-    {
-        return false;
-    }
-
-    public function isPublic(): bool
-    {
-        return true;
-    }
-
-    public function getName(): string
-    {
-        return $this->name;
     }
 
     public function getReturnType(): Type

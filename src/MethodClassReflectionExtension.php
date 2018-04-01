@@ -34,7 +34,6 @@ class MethodClassReflectionExtension implements MethodsClassReflectionExtension,
         if (!isset($this->methods[$classReflection->getName()])) {
             $this->methods[$classReflection->getName()] = $this->createMethods($classReflection);
         }
-
         return isset($this->methods[$classReflection->getName()][strtolower($methodName)]);
     }
 
@@ -77,7 +76,7 @@ class MethodClassReflectionExtension implements MethodsClassReflectionExtension,
                 $extensionClassReflection = $this->broker->getClass($extensionClass);
                 foreach (get_class_methods($extensionClass) as $methodName) {
                     /** @var $methodReflection PhpMethodReflection */
-                    $methodReflection = $extensionClassReflection->getMethod($methodName);
+                    $methodReflection = $extensionClassReflection->getNativeMethod($methodName);
                     $methods[strtolower($methodName)] = $methodReflection;
                 }
             }
@@ -91,7 +90,7 @@ class MethodClassReflectionExtension implements MethodsClassReflectionExtension,
         foreach (get_class_methods($class) as $methodName) {
             if ($methodName && $methodName[0] === '_' && isset($methodName[1]) && $methodName[1] !== '_') {
                 $uncachedMethodName = substr($methodName, 1);
-                $methods[strtolower($uncachedMethodName)] = new CachedMethod($classReflection->getMethod($methodName));
+                $methods[strtolower($uncachedMethodName)] = new CachedMethod($classReflection->getNativeMethod($methodName));
             }
         }
 
@@ -106,7 +105,7 @@ class MethodClassReflectionExtension implements MethodsClassReflectionExtension,
             $failoverClassReflection = $this->broker->getClass($class);
             foreach (get_class_methods($class) as $methodName) {
                 /** @var $methodReflection PhpMethodReflection */
-                $methodReflection = $failoverClassReflection->getMethod($methodName);
+                $methodReflection = $failoverClassReflection->getNativeMethod($methodName);
                 $methods[strtolower($methodName)] = $methodReflection;
             }
         }

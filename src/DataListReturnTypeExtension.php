@@ -126,7 +126,7 @@ class DataListReturnTypeExtension implements \PHPStan\Type\DynamicMethodReturnTy
             case 'byID':
             case 'first':
             case 'last':
-                return $type->getItemType();
+                return $type->getIterableValueType();
             break;
 
             default:

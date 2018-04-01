@@ -45,8 +45,9 @@ class DataObjectGetStaticReturnTypeExtension implements \PHPStan\Type\DynamicSta
                     }
                     return $methodReflection->getReturnType();
                 }
-                // Handle Page::get() / self::get()
+                // Handle Page::get()
                 $callerClass = $methodCall->class->toString();
+                // Handle static::get() / self::get()
                 if ($callerClass === 'static') {
                     return $methodReflection->getReturnType();
                 }
